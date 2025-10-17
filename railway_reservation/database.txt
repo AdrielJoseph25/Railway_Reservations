@@ -1,0 +1,87 @@
+-- Create database
+CREATE DATABASE IF NOT EXISTS railway_reservation;
+USE railway_reservation;
+
+-- Users table
+CREATE TABLE users (
+    user_id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    role ENUM('user', 'admin') DEFAULT 'user'
+);
+
+-- Trains table
+CREATE TABLE trains (
+    train_id INT AUTO_INCREMENT PRIMARY KEY,
+    train_name VARCHAR(100) NOT NULL,
+    source VARCHAR(100) NOT NULL,
+    destination VARCHAR(100) NOT NULL,
+    total_seats INT NOT NULL
+);
+
+-- Schedules table
+CREATE TABLE schedules (
+    schedule_id INT AUTO_INCREMENT PRIMARY KEY,
+    train_id INT,
+    departure_time DATETIME NOT NULL,
+    arrival_time DATETIME NOT NULL,
+    available_seats INT NOT NULL,
+    FOREIGN KEY (train_id) REFERENCES trains(train_id) ON DELETE CASCADE
+);
+
+-- Bookings table
+CREATE TABLE bookings (
+    booking_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    schedule_id INT,
+    booking_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status ENUM('confirmed', 'cancelled') DEFAULT 'confirmed',
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (schedule_id) REFERENCES schedules(schedule_id) ON DELETE CASCADE
+);
+
+-- Complaints table
+CREATE TABLE complaints (
+    complaint_id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT,
+    complaint_text TEXT NOT NULL,
+    submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    status ENUM('open', 'closed') DEFAULT 'open',
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+-- Passengers table
+CREATE TABLE passengers (
+    passenger_id INT AUTO_INCREMENT PRIMARY KEY,
+    booking_id INT,
+    first_name VARCHAR(50) NOT NULL,
+    last_name VARCHAR(50) NOT NULL,
+    FOREIGN KEY (booking_id) REFERENCES bookings(booking_id) ON DELETE CASCADE
+);
+
+-- Complaint messages table
+CREATE TABLE complaint_messages (
+    message_id INT AUTO_INCREMENT PRIMARY KEY,
+    complaint_id INT,
+    user_id INT,
+    message_text TEXT NOT NULL,
+    submitted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (complaint_id) REFERENCES complaints(complaint_id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+-- Sample data for users
+INSERT INTO users (username, password, email, role) VALUES
+('john_doe', 'password123', 'john@example.com', 'user'),
+('admin', 'adminpass', 'admin@example.com', 'admin');
+
+-- Sample data for trains
+INSERT INTO trains (train_name, source, destination, total_seats) VALUES
+('Express 101', 'New York', 'Boston', 100),
+('Superfast 202', 'Chicago', 'Miami', 150);
+
+-- Sample data for schedules
+INSERT INTO schedules (train_id, departure_time, arrival_time, available_seats) VALUES
+(1, '2025-06-01 08:00:00', '2025-06-01 12:00:00', 100),
+(2, '2025-06-02 09:00:00', '2025-06-02 15:00:00', 150);
