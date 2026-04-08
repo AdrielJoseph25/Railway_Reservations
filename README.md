@@ -39,6 +39,8 @@ Here’s what you can do with Railway Reservations:
 - Database design and query handling using MySQL  
 - Managing user authentication and session handling  
 - Structuring real-world systems like booking workflows
+
+---
   
 🚀 How to Run
 # Clone the repository
