@@ -5,9 +5,9 @@ Built to simulate real-world ticketing systems with user and admin functionaliti
 
 
 ⚙️ Technologies
-	•	Flask (Python)
-	•	MySQL
-	•	HTML, CSS, JavaScript
+	• Flask (Python)
+	• MySQL
+	• HTML, CSS, JavaScript
 
 ✨ Features
 
