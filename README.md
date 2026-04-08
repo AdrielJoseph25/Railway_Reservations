@@ -3,14 +3,11 @@
 A web-based railway reservation system for booking, canceling, and managing train tickets.
 Built to simulate real-world ticketing systems with user and admin functionalities.
 
-⸻
 
 ⚙️ Technologies
 	•	Flask (Python)
 	•	MySQL
 	•	HTML, CSS, JavaScript
-
-⸻
 
 ✨ Features
 
@@ -22,7 +19,6 @@ Here’s what you can do with Railway Reservations:
 	•	Ticket History: Track previous bookings
 	•	Admin Panel: Manage trains and system data
 
-⸻
 
 🧠 The Process
 	•	Designed a full-stack web application using Flask for backend logic
@@ -30,15 +26,12 @@ Here’s what you can do with Railway Reservations:
 	•	Built a responsive frontend using HTML, CSS, and JavaScript
 	•	Focused on implementing real-world booking flow and data handling
 
-⸻
 
 📚 What I Learned
 	•	Building full-stack applications with Flask
 	•	Database design and query handling using MySQL
 	•	Managing user authentication and session handling
 	•	Structuring real-world systems like booking workflows
-
-⸻
 
 🚀 How to Run
 # Clone the repository
